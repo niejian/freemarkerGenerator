@@ -12,6 +12,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import org.springframework.util.StringUtils;
+
 import cn.com.bluemoon.allConst.Const;
 import cn.com.bluemoon.common.GenerateUtils;
 import cn.com.bluemoon.freemarker.UpperFirstCharacter;
@@ -305,7 +307,10 @@ public class PoVoGenerateUtil {
         		data.put("querySql", querySql);
         		data.put("namespace", namespace);
         		data.put("baseResultMap", baseResultMap);
-        	
+        		String countSql = this.convertQuerySql2CountSql(querySql);
+        		if(!StringUtils.isEmpty(countSql)){
+        			data.put("countSql", countSql);
+        		}
         		template.process(data, new  OutputStreamWriter(fos, "utf-8" )); 
         		fos.flush();  
         		fos.close();
@@ -335,7 +340,10 @@ public class PoVoGenerateUtil {
         		data.put("className", className);
         		data.put("packageName", packageName);
         		data.put("fullBeanName", fullBeanName);
+        		
         		template.process(data, new OutputStreamWriter(fos, "utf-8"));
+        		
+        	
         		
         		fos.flush();  
         		fos.close();
@@ -351,7 +359,27 @@ public class PoVoGenerateUtil {
 				}
 			}
 		}
-        
-        
+	}
+	
+	/**
+	 * 将查询sql转换问统计sq。
+	 * 规定sql中的from关键字小写或者大写，其他的不支持
+	 * @param querySql
+	 * @return
+	 */
+	private String convertQuerySql2CountSql(String querySql){
+		int index = -1;
+		String countSql = querySql;
+		if(countSql.contains("from") || countSql.contains("FROM")){
+			index = countSql.indexOf("from");
+		}else if(countSql.contains("FROM")){
+			index = countSql.indexOf("from");
+		}
+		
+		if(index > 0){
+			countSql = "select count(1) as num " + countSql.substring(index);
+		}
+		
+		return countSql;
 	}
 }

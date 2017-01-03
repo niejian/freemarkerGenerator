@@ -39,4 +39,22 @@
 	 limit ${r"#{startIndex}"}, ${r"${pageSize}"}
   </select>
   
+  
+  <!--根据前台条件，获取记录总数,如果有时间的过滤，需要自己手动添加-->
+  <select id="getTotalEntity" parameterType="java.util.HashMap" resultType="java.lang.Integer"> 
+	${countSql}
+		where 1=1
+	<#-- 
+		遍历这个实体类，和查询语句每个字段
+		过滤掉时间的判断，时间判断是比较复杂的，到底是大于、小于还是怎么样要根据自己实际的业务来添加
+	 -->
+	<#list beanProperties as property>
+		<#if property.columnType != 'DATETIME'>
+			<if test="${property.javaColumnName} != '' and null != ${property.javaColumnName}" >
+				AND ${property.javaColumnName} = ${r"#{" + property.javaColumnName + "}"}
+			</if>
+		</#if>
+	</#list>
+  </select>
+  
 </mapper>

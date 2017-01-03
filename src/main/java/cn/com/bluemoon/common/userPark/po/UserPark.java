@@ -2,7 +2,7 @@ package  cn.com.bluemoon.common.userPark.po;
 import java.io.Serializable;
 
 public class UserPark implements Serializable{ 
-	private static final long serialVersionUID = 1483428359024L;
+	private static final long serialVersionUID = 1483433727044L;
     private java.sql.Timestamp updateTime;  
     private java.lang.String nickName;  
     private java.lang.String name;  
