@@ -1,0 +1,52 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script type="text/javascript" src="${ctxPath}/resource/js/jquery.js"></script>
+<script type="text/javascript" src="${ctxPath}/resource/bootstrap/js/bootstrap.min.js"></script>
+<link href="${ctxPath}/resource/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${ctxPath}/resource/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="${ctxPath}/resource/bootstrap/css/grid.css" rel="stylesheet">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>userInfo</title>
+</head>
+<p>使用beetl模板进行输出</p>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>编号</th>
+				<th>用户名</th>
+				<th>年龄</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%for(user in users){%>
+				<tr>
+					<td>${user.id}</td>
+					<td>${user.userName}</td>
+					<td>${user.age}</td>
+				</tr>
+			<%}%>
+		</tbody>
+	</table>
+	<div class="container">
+		<div class="row">
+	        <div class="col-md-4">编号</div>
+	        <div class="col-md-4">用户名</div>
+	        <div class="col-md-4">年龄</div>
+	      </div>
+     </div>
+	<div class="container">
+		<%for(user in users){%>
+			<div class="row">
+		        <div class="col-md-4">${user.id}</div>
+		        <div class="col-md-4">${user.userName}</div>
+		        <div class="col-md-4">${user.age}</div>
+	      	</div>
+      	<%}%>
+	</div>
+	
+</body>
+</html>
