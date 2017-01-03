@@ -31,4 +31,26 @@
 	 limit #{startIndex}, ${pageSize}
   </select>
   
+  
+  <!--根据前台条件，获取记录总数,如果有时间的过滤，需要自己手动添加-->
+  <select id="getTotalEntity" parameterType="java.util.HashMap" resultType="java.lang.Integer"> 
+	select count(1) as num from sys_user a LEFT JOIN  place_rent b on a.id = b.owner_id LEFT JOIN park c on b.park_id = c.id where b.owner_id is not null
+		where 1=1
+			<if test="nickName != '' and null != nickName" >
+				AND nickName = #{nickName}
+			</if>
+			<if test="name != '' and null != name" >
+				AND name = #{name}
+			</if>
+			<if test="mobile != '' and null != mobile" >
+				AND mobile = #{mobile}
+			</if>
+			<if test="plate != '' and null != plate" >
+				AND plate = #{plate}
+			</if>
+			<if test="address != '' and null != address" >
+				AND address = #{address}
+			</if>
+  </select>
+  
 </mapper>
