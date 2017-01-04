@@ -24,6 +24,5 @@ js/*
 nui/*
 css/*
 *.css
-
-
-
+*.png
+*.jpg
