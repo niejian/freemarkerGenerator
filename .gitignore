@@ -18,6 +18,12 @@ target/
 .metadata/
 RemoteSystemsTempFiles/
 bin/
+*.js
+*.jsp
+js/*
+nui/*
+css/*
+*.css
 
 
 

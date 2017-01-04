@@ -38,19 +38,30 @@ public class UserParkController{
 			int size = Integer.parseInt(pageSize);
 			int startIndex = Integer.parseInt(pageSize) * Integer.parseInt(pageIndex);
 			
+			if(json.has("updateTime")){
 				String updateTime = json.getString("updateTime");
 				paraMap.put("updateTime", updateTime);
+			}
+			if(json.has("nickName")){
 				String nickName = json.getString("nickName");
 				paraMap.put("nickName", nickName);
+			}
+			if(json.has("name")){
 				String name = json.getString("name");
 				paraMap.put("name", name);
+			}
+			if(json.has("mobile")){
 				String mobile = json.getString("mobile");
 				paraMap.put("mobile", mobile);
+			}
+			if(json.has("plate")){
 				String plate = json.getString("plate");
 				paraMap.put("plate", plate);
+			}
+			if(json.has("address")){
 				String address = json.getString("address");
 				paraMap.put("address", address);
-			
+			}
 		
 			paraMap.put("pageSize", size);
 			paraMap.put("startIndex", startIndex);

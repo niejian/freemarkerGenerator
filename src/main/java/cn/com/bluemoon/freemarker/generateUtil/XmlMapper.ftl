@@ -20,11 +20,11 @@
   	<#--
   		fullBeanName ： 返回实体类的类名全路径：cn.com.bluemoon.common.activity.po.MallWashActivityInfo
   		querySql : 查询语句
+  		规定sql语句中不管有没有where条件都要加上 1=1的条件
   		
   	    -->
-  <select id="queryEntity" parameterType="java.util.HashMap" resultType="BaseResultMap"> 
-		${querySql}
-			where 1=1
+  <select id="queryEntity" parameterType="java.util.HashMap" resultMap="BaseResultMap"> 
+		${querySql} 
 		<#-- 
 			遍历这个实体类，和查询语句每个字段
 			过滤掉时间的判断，时间判断是比较复杂的，到底是大于、小于还是怎么样要根据自己实际的业务来添加
@@ -36,14 +36,13 @@
 				</if>
 			</#if>
 		</#list>
-	 limit ${r"#{startIndex}"}, ${r"${pageSize}"}
+	 limit ${r"#{startIndex}"}, ${r"#{pageSize}"}
   </select>
   
   
-  <!--根据前台条件，获取记录总数,注意：这里不支持子查询、union查询,如果有时间的过滤，需要自己手动添加-->
+  <!-- 根据前台条件，获取记录总数,注意：这里不支持子查询、union查询,如果有时间的过滤，需要自己手动添加 -->
   <select id="getTotalEntity" parameterType="java.util.HashMap" resultType="java.lang.Integer"> 
-	${countSql}
-		where 1=1
+	${countSql} 
 	<#-- 
 		遍历这个实体类，和查询语句每个字段
 		过滤掉时间的判断，时间判断是比较复杂的，到底是大于、小于还是怎么样要根据自己实际的业务来添加

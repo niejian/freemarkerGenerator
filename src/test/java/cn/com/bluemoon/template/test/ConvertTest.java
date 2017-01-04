@@ -33,7 +33,7 @@ public class ConvertTest {
 				+ " from sys_user a "
 				+ "LEFT JOIN  place_rent b on a.id = b.owner_id "
 				+ "LEFT JOIN park c on b.park_id = c.id "
-				+ "where b.owner_id is not null";
+				+ "where 1=1 and b.owner_id is not null";
 		
 		String TableOrView = Const.SQL_VIEW;
 		String beanName = "userPark";

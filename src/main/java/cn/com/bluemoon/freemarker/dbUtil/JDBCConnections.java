@@ -154,8 +154,13 @@ public class JDBCConnections {
 			    		//数据表字段类型对应的java po类型
 			    		/**java字段类型*/
 			    		String javaType = datas.getColumnClassName(index);
+			    		// mysql的datetime类型对应的mybatis的jdbctype是timestamp
+			    		
 			    		/**数据表字段类型*/
 			    		String columnType = datas.getColumnTypeName(index);
+			    		if(columnType.equalsIgnoreCase("DATETIME")){
+			    			columnType = "TIMESTAMP";
+			    		}
 			    		/**数据表字段名称*/
 			    		String propertyName = datas.getColumnName(index);
 			    		/**java字段名称*/

@@ -47,9 +47,11 @@ public class ${controllerName}{
 			-->
 			
 			<#list propertyBeans as beanProperty>
+			if(json.has("${beanProperty.javaColumnName}")){
 				String ${beanProperty.javaColumnName} = json.getString("${beanProperty.javaColumnName}");
 				<#-- 放到查询条件中 -->
 				paraMap.put("${beanProperty.javaColumnName}", ${beanProperty.javaColumnName});
+			}
 			</#list>
 		
 			<#-- 放入分页参数 -->
