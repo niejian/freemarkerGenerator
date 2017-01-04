@@ -40,7 +40,7 @@
   </select>
   
   
-  <!--根据前台条件，获取记录总数,如果有时间的过滤，需要自己手动添加-->
+  <!--根据前台条件，获取记录总数,注意：这里不支持子查询、union查询,如果有时间的过滤，需要自己手动添加-->
   <select id="getTotalEntity" parameterType="java.util.HashMap" resultType="java.lang.Integer"> 
 	${countSql}
 		where 1=1

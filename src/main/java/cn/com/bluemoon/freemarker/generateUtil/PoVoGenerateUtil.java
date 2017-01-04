@@ -247,6 +247,9 @@ public class PoVoGenerateUtil {
             // 生成mapper文件
             sql2Mapper(querySql, propertyBeans, cfg, commonFilePath, javaFileName, baseResultMap, poPackageName);
             
+            //3:生成controller文件
+            
+            
         } catch  (IOException e) {  
             e.printStackTrace();  
         } catch  (TemplateException e) {  
@@ -319,7 +322,8 @@ public class PoVoGenerateUtil {
         		template = cfg.getTemplate("JavaMapper.ftl");
         		
         		outPutFile = new File(filePath);
-        		file = new  File( outPutFile, fileName + "CommonMapper.java");
+        		String javaMapperNameTmp = fileName + "CommonMapper";
+        		file = new  File( outPutFile, javaMapperNameTmp + ".java");
         		//创建文件夹
         		while(!outPutFile.exists()){
         			outPutFile.mkdirs();
@@ -343,10 +347,66 @@ public class PoVoGenerateUtil {
         		
         		template.process(data, new OutputStreamWriter(fos, "utf-8"));
         		
-        	
+        		fos.flush();  
+        		fos.close();
+        		
+        		// 加载模板
+        		template = cfg.getTemplate("ControllerGen.ftl");
+        		
+        		//数据载体
+        		data = new  HashMap<String, Object>();
+        		
+        		// 生成Controller文件
+        		String requestMapping = javaMapperName + "Controller";
+        		data.put("requestMapping", requestMapping);
+        		String controllerName = fileName + "Controller";
+        		data.put("controllerName", controllerName);
+        		// autowried, 注入service
+        		String autoWiredService = javaMapperNameTmp;
+        		data.put("autoWiredService", autoWiredService);
+        		// 找到这个mapper的包路径
+        		List<String> importPackages = new ArrayList<String>();
+        		String importPackage = packageName + "." +javaMapperNameTmp;
+        		importPackages.add(importPackage);
+        		data.put("importPackages", importPackages);
+        		// xml中的baseResultMap也是返回实体的全路径
+        		String entity = baseResultMap;
+        		data.put("entity", entity);
+        		// service 名称
+        		String autoWiredServiceName = javaMapperName + "CommonMapper";
+        		data.put("autoWiredServiceName", autoWiredServiceName);
+        		String modelName = javaMapperName;
+        		data.put("modelName", modelName);
+        		data.put("propertyBeans", propertyBeans);
+        		
+        		//package name
+        		// package cn.com.bluemoon.manager.auth
+        		packageName = Const.BASE_PACKAGE_NAME + ".manager." + javaMapperName;
+        		data.put("packageName", packageName);
+        		// controller 包名如下： cn.com.bluemoon.manager.模块名.xxController
+        		 String baseJavaPath = System.getProperty("user.dir");
+                 String controllerPath = baseJavaPath + Const.BASE_JAVA_FILE_PATH + "\\manager\\" + javaMapperName + "\\";
+        		//String controllerPath = 
+        		outPutFile = new File(controllerPath);
+        		//String javaMapperNameTmp = fileName + "CommonMapper";
+        		file = new  File( outPutFile, controllerName + ".java");
+        		//创建文件夹
+        		while(!outPutFile.exists()){
+        			outPutFile.mkdirs();
+        		}
+        		//创建文件
+        		if(!file.exists()){
+        			file.createNewFile();
+        		}else{
+        			file.delete();
+        		}
+        		
+        		fos = new  FileOutputStream(file);
+        		template.process(data, new OutputStreamWriter(fos, "utf-8"));
         		
         		fos.flush();  
         		fos.close();
+        		
         	}
 		} catch (Exception e) {
 			e.printStackTrace();

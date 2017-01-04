@@ -1,7 +1,5 @@
-package ${packageName};
-<#list importPackages as importPackage>
-import ${importPackage};
-</#list>
+package cn.com.bluemoon.manager.userPark;
+import cn.com.bluemoon.common.userPark.mapper.UserParkCommonMapper;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,47 +17,48 @@ import java.util.Map;
 import java.util.HashMap;
 
 @Controller
-@RequestMapping(value="/${requestMapping}")
-public class ${controllerName}{
+@RequestMapping(value="/userParkController")
+public class UserParkController{
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	@Autowired
-	private ${autoWiredService} ${autoWiredServiceName};
+	private UserParkCommonMapper userParkCommonMapper;
 	
-	<#-- 命名：默认pc查询列表调用的名称是 getEntities -->
 	@ResponseBody
-	@RequestMapping(value="/${modelName}/queryEntities", method=RequestMethod.POST)
+	@RequestMapping(value="/userPark/queryEntities", method=RequestMethod.POST)
 	public Map<String, Object> queryEntities(HttpServletRequest request, @RequestBody JSONObject json){
-		List<${entity}> list = new ArrayList<${entity}>();
+		List<cn.com.bluemoon.common.userPark.po.UserPark> list = new ArrayList<cn.com.bluemoon.common.userPark.po.UserPark>();
 		Map<String,Object> resultMap= new HashMap<String, Object>();
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		int total = 0;
 		
 		try{
-			<#-- 页码和每页条数从端穿过来，这个不变 -->
 			// 页码和每页条数从pc端传过来，这个不变
 			String pageIndex = json.getString("pageIndex");
 			String pageSize = json.getString("pageSize");
 			int size = Integer.parseInt(pageSize);
 			int startIndex = Integer.parseInt(pageSize) * Integer.parseInt(pageIndex);
-			<#-- 
-				遍历这个entity的所有字段,字段都当作字符串来处理
-				时间类型字段是在前台格式化好后传过来的
-			-->
 			
-			<#list propertyBeans as beanProperty>
-				String ${beanProperty.javaColumnName} = json.getString("${beanProperty.javaColumnName}");
-				<#-- 放到查询条件中 -->
-				paraMap.put("${beanProperty.javaColumnName}", ${beanProperty.javaColumnName});
-			</#list>
+				String updateTime = json.getString("updateTime");
+				paraMap.put("updateTime", updateTime);
+				String nickName = json.getString("nickName");
+				paraMap.put("nickName", nickName);
+				String name = json.getString("name");
+				paraMap.put("name", name);
+				String mobile = json.getString("mobile");
+				paraMap.put("mobile", mobile);
+				String plate = json.getString("plate");
+				paraMap.put("plate", plate);
+				String address = json.getString("address");
+				paraMap.put("address", address);
+			
 		
-			<#-- 放入分页参数 -->
 			paraMap.put("pageSize", size);
 			paraMap.put("startIndex", startIndex);
 			
 			// 还需要查询这些条件得到的记录总数
-			total = this.${autoWiredServiceName}.getTotalEntity(paraMap);
+			total = this.userParkCommonMapper.getTotalEntity(paraMap);
 			// 查询记录
-			list = this.${autoWiredServiceName}.queryEntity(paraMap);
+			list = this.userParkCommonMapper.queryEntity(paraMap);
 			
 		}catch(Exception e){
 			e.printStackTrace();
