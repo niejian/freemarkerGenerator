@@ -9,7 +9,7 @@
 	<!-- 注解扫描包 -->  
 	<!-- <task:annotation-driven/>  -->
 	<!-- 引入dbconfig.properties属性文件 -->
-	<!-- <context:property-placeholder location="classpath:property/jdbc.properties" /> -->
+	<context:property-placeholder location="classpath:jdbc.properties" /> 
 	<context:component-scan base-package="cn.com.bluemoon.service" />
 <!-- 	
 	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
