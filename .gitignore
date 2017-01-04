@@ -18,8 +18,6 @@ target/
 .metadata/
 RemoteSystemsTempFiles/
 bin/
-washingService-parent/washingServiceMana/bluemoonMana/.gitignore
-washingService-parent/washingService-timer/.gitignore
-washingService-parent/washingService-service/.gitignore
+
 
 
