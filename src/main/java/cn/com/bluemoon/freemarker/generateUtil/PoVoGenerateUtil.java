@@ -283,9 +283,10 @@ public class PoVoGenerateUtil {
         		// mapper文件中的namespace
         		String javaMapperName = fileName;
         		char[] javaFileNameChars = javaMapperName.toCharArray();
-        		//将首字母转大写
+        		//将首字母转小写，符合大众的命名规则
         		javaFileNameChars[0] = Character.toLowerCase(javaFileNameChars[0]);
         		// cn.com.bluemoon.common.activity.mapper.MallWashActivityAuthMapper
+        		// java方法转首字母转大写
         		javaMapperName = new String(javaFileNameChars);
         		String mapperName = fileName + "CommonMapper";
         		String namespace = Const.BASE_PACKAGE_NAME + ".common." + javaMapperName +".mapper."+ mapperName;

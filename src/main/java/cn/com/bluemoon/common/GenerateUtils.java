@@ -2,6 +2,7 @@ package cn.com.bluemoon.common;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -103,5 +104,12 @@ public class GenerateUtils {
 		}
 		
 		return map;
+	}
+	
+	public static void main(String[] args) {
+		  BigDecimal   c = new BigDecimal(123456789.00);
+		   DecimalFormat myformat = new java.text.DecimalFormat("#.00");
+		   String str = myformat.format(c);
+		   System.out.println(new BigDecimal(str));
 	}
 }
