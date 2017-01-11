@@ -24,4 +24,6 @@ public class Const {
 	public static final String SQL_VIEW = "view";
 	
 	public SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+	
+	public static final String ENCODE = "UTF-8";
 }

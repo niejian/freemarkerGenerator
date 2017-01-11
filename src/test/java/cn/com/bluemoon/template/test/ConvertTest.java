@@ -6,6 +6,7 @@ import org.junit.Test;
 import cn.com.bluemoon.allConst.Const;
 import cn.com.bluemoon.freemarker.dbUtil.DBParseBean;
 import cn.com.bluemoon.freemarker.generateUtil.PoVoGenerateUtil;
+import cn.com.bluemoon.freemarker.generateUtil.PoVoGenerateUtil_v2;
 
 public class ConvertTest {
 
@@ -27,7 +28,8 @@ public class ConvertTest {
 	//@Ignore
 	@Test
 	public void test2(){
-		PoVoGenerateUtil generateUtil = new PoVoGenerateUtil();
+		//PoVoGenerateUtil generateUtil = new PoVoGenerateUtil();
+		PoVoGenerateUtil_v2 generateUtil = new PoVoGenerateUtil_v2();
 		String querySql = "SELECT c.update_time as updateTime, a.nick_name as nickName, a.`name` as name, a.mobile as mobile, a.plate as plate,"
 				+ " c.address as address "
 				+ " from sys_user a "
@@ -37,7 +39,7 @@ public class ConvertTest {
 		
 		String TableOrView = Const.SQL_VIEW;
 		String beanName = "userPark";
-		generateUtil.table2Bean_v2(querySql, TableOrView, beanName);
+		generateUtil.table2Bean_v3(querySql, TableOrView, beanName);
 		//generateUtil.table2Bean_v2("ofo_meeting_summary_base", Const.SQL_TABLE, "");
 	}
 	
