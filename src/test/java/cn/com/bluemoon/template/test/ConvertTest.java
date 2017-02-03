@@ -1,5 +1,7 @@
 package cn.com.bluemoon.template.test;
 
+import java.io.FileInputStream;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -25,7 +27,7 @@ public class ConvertTest {
 		bean2.table2Bean();
 	}
 	
-	//@Ignore
+	@Ignore
 	@Test
 	public void test2(){
 		//PoVoGenerateUtil generateUtil = new PoVoGenerateUtil();
@@ -65,4 +67,12 @@ public class ConvertTest {
 		}
 		System.out.println(querySql);
 	}
+	
+	/*public static void main(String[] args) {
+		FileInputStream in = new FileInputStream ("c:\\a.doc"); 
+		  WordExtractor extractor = new WordExtractor(); 
+		  String str = extractor.extractText(in); 
+		  System.out.println("the result length is"+str.length()); 
+		   System.out.println("the result is"+str); 
+	}*/
 }
